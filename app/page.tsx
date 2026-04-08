@@ -148,7 +148,16 @@ export default function Home() {
           <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.1em] text-neutral-500">
             Generated
           </p>
-          <img src={result.image.dataUrl} alt="Generated try-on" className="w-full rounded-sm" />
+          <div className="relative overflow-hidden rounded-sm">
+            <img src={result.image.dataUrl} alt="Generated try-on" className="w-full" />
+            <a
+              href={result.image.dataUrl}
+              download={getDownloadFileName(result.createdAt, result.image.mimeType)}
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded border border-white/60 bg-neutral-950/70 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-white opacity-50 backdrop-blur-xl transition-opacity hover:opacity-80"
+            >
+              Download
+            </a>
+          </div>
         </section>
       )}
 
@@ -188,4 +197,10 @@ export default function Home() {
       </button>
     </div>
   );
+}
+
+function getDownloadFileName(createdAt: string, mimeType: string) {
+  const extension = mimeType === "image/jpeg" ? "jpg" : mimeType.split("/")[1] || "png";
+  const timestamp = createdAt.replace(/[:.]/g, "-");
+  return `sneaker-try-on-${timestamp}.${extension}`;
 }
