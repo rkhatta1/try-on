@@ -37,23 +37,38 @@ export default function Home() {
       <div className="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <label className="cursor-pointer">
           <span className="mb-2 block text-[11px] font-semibold uppercase tracking-[0.1em] text-neutral-500">
-            Person
+            the fit
           </span>
           <div className="relative aspect-[3/4] w-full overflow-hidden rounded border border-neutral-200 bg-white transition-colors hover:border-neutral-400">
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              onChange={(e) => setPersonFile(e.target.files?.[0] ?? null)}
+              onChange={(event) => setPersonFile(event.target.files?.[0] ?? null)}
               hidden
             />
             {personPreviewUrl ? (
               <img src={personPreviewUrl} alt="Person" className="h-full w-full object-cover" />
             ) : (
-              <span className="absolute inset-0 grid place-items-center text-neutral-300">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
+              <span className="absolute inset-0 grid place-items-center px-8 text-center text-neutral-400">
+                <span className="grid place-items-center gap-5">
+                  <span className="font-caveat text-[1.2rem] leading-none text-neutral-500">
+                    upload your photo of the fit
+                  </span>
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                </span>
               </span>
             )}
           </div>
@@ -67,17 +82,49 @@ export default function Home() {
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              onChange={(e) => setShoeFile(e.target.files?.[0] ?? null)}
+              onChange={(event) => setShoeFile(event.target.files?.[0] ?? null)}
               hidden
             />
             {shoePreviewUrl ? (
               <img src={shoePreviewUrl} alt="Sneaker" className="h-full w-full object-cover" />
             ) : (
-              <span className="absolute inset-0 grid place-items-center text-neutral-300">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
+              <span className="absolute inset-0 grid place-items-center px-12 text-center text-neutral-400">
+                <span className="grid place-items-center">
+                  <span className="font-caveat text-[1.2rem] leading-[0.95] text-neutral-500">
+                    upload the photo of the sneaker you wanna pair the fit with
+                  </span>
+                  <svg
+                  className="mt-6"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                  </svg>
+                  <span className="mt-6 font-caveat text-[1.2rem] leading-none text-neutral-500">
+                    or paste the sneaker&apos;s url
+                  </span>
+                  <svg
+                    className="mt-2 h-24 w-24 translate-y-4 text-neutral-500"
+                    viewBox="0 0 96 96"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M24 12C61 18 76 45 46 75" />
+                    <path d="M35 66C39 72 43 76 46 80C51 76 58 73 66 72" />
+                  </svg>
+                </span>
               </span>
             )}
           </div>
@@ -87,16 +134,14 @@ export default function Home() {
       <div className="mb-1">
         <input
           type="url"
-          placeholder="Or sneaker image / product page URL"
+          placeholder="sneaker image / product page URL"
           value={shoeImageUrl}
-          onChange={(e) => setShoeImageUrl(e.target.value)}
+          onChange={(event) => setShoeImageUrl(event.target.value)}
           className="w-full border-0 border-b border-neutral-200 bg-transparent py-3.5 text-[15px] text-neutral-900 placeholder:text-neutral-300 transition-colors focus:outline-none focus:border-neutral-900"
         />
       </div>
 
-      {error && (
-        <p className="mt-4 text-[13px] font-medium text-red-700">{error}</p>
-      )}
+      {error && <p className="mt-4 text-[13px] font-medium text-red-700">{error}</p>}
 
       {result && (
         <section className="mt-12">
@@ -116,7 +161,7 @@ export default function Home() {
             <button
               type="button"
               onClick={clearHistory}
-              className="border-none bg-transparent p-0 text-[13px] text-neutral-500 underline underline-offset-[3px] cursor-pointer"
+              className="cursor-pointer border-none bg-transparent p-0 text-[13px] text-neutral-500 underline underline-offset-[3px]"
             >
               Clear all
             </button>
@@ -134,13 +179,12 @@ export default function Home() {
         </section>
       )}
 
-      {/* Sticky FAB */}
       <button
         className="fixed bottom-6 left-1/2 z-50 w-[calc(100%-40px)] max-w-[520px] -translate-x-1/2 rounded border border-neutral-900 bg-neutral-900 px-4 py-4 text-[14px] font-semibold uppercase tracking-[0.04em] text-white shadow-md backdrop-blur-md transition-all hover:bg-transparent hover:text-neutral-900 disabled:cursor-not-allowed disabled:border-neutral-300 disabled:bg-neutral-300 disabled:text-neutral-400"
         disabled={!canSubmit}
         onClick={() => handleSubmit()}
       >
-        {isGenerating ? "Generating…" : "Generate"}
+        {isGenerating ? "Generating..." : "Generate"}
       </button>
     </div>
   );

@@ -22,3 +22,9 @@
     font: inherit;
   }
 }
+
+@layer utilities {
+  .font-caveat {
+    font-family: var(--font-caveat), cursive;
+  }
+}
