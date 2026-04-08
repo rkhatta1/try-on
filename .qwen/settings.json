@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(firecrawl *)",
+      "Bash(jq *)",
+      "Bash(mkdir *)",
+      "Bash(pnpm *)",
+      "Bash(rm *)",
+      "Bash(grep *)",
+      "Bash(npx *)"
+    ]
+  },
+  "$version": 3
+}
